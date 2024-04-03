@@ -21,6 +21,129 @@ import Collapse from "@mui/material/Collapse";
 import { useState } from "react";
 
 function NavBar() {
+  const MenuCategoryList = [
+    {
+      mainCategoryid: "1",
+      mainCategoryName: "Home",
+      Mainroute: "/home",
+      subCategory: [
+        {
+          setCategoryId: "1.1",
+          subCategoryName: "Kitchen",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: "",
+          subCategoryName: "Dining",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 3,
+          subCategoryName: "Bath",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 4,
+          subCategoryName: "Home Accessories",
+          subCategoryRoute: "",
+        },
+      ],
+    },
+    {
+      mainCategoryid: 2,
+      mainCategoryName: "Fashion",
+      Mainroute: "/fashion",
+      subCategory: [
+        {
+          setCategoryId: 1,
+          subCategoryName: "Mens Fashion",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 2,
+          subCategoryName: "Womens Fashion",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 3,
+          subCategoryName: "Kids",
+          subCategoryRoute: "",
+        },
+      ],
+    },
+    {
+      mainCategoryid: 3,
+      mainCategoryName: "Grocery",
+      Mainroute: "/grocery",
+      subCategory: [
+        {
+          setCategoryId: 1,
+          subCategoryName: "grocery1",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 2,
+          subCategoryName: "grocery2",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 3,
+          subCategoryName: "grocery3",
+          subCategoryRoute: "",
+        },
+      ],
+    },
+    {
+      mainCategoryid: 4,
+      mainCategoryName: "Electronics",
+      Mainroute: "/electronics",
+      subCategory: [
+        {
+          setCategoryId: 1,
+          subCategoryName: "Mobiles",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 2,
+          subCategoryName: "TV",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 3,
+          subCategoryName: "Laptops",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 4,
+          subCategoryName: "Accesories",
+          subCategoryRoute: "",
+        },
+      ],
+    },
+    {
+      mainCategoryid: 5,
+      mainCategoryName: "Others",
+      Mainroute: "/others",
+      subCategory: [
+        {
+          setCategoryId: 1,
+          subCategoryName: "Luggage",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 2,
+          subCategoryName: "Sports&Fitness",
+          subCategoryRoute: "",
+        },
+        {
+          subCatergoryId: 3,
+          subCategoryName: "Books",
+          subCategoryRoute: "",
+        },
+      ],
+    },
+  ];
+
   const initialCategoryState = {
     Home: false,
     Fashion: false,
@@ -28,7 +151,7 @@ function NavBar() {
     Electronics: false,
   };
   const [openMenu, setOpenMenu] = useState(initialCategoryState);
-  console.log(openMenu);
+  // console.log(openMenu);
 
   const [categoryButton, setCategoryButton] = useState(null);
   const handleCategoryButton = (event) => {
@@ -37,8 +160,9 @@ function NavBar() {
     // setAnchorEl(event.currentTarget);
   };
 
-  const handleExpandMenu = () => {
-    setOpenMenu((prev) => ({ ...prev, Home: !prev.Home }));
+  const handleExpandMenu = (mainCategoryName) => {
+    console.log("inside handleExpand", mainCategoryName);
+    // setOpenMenu((prev) => ({ ...prev, category: !prev.Home }));
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -68,39 +192,37 @@ function NavBar() {
             PaperProps={{ sx: { width: 300 } }}
           >
             <List sx={{ width: "100%", maxWidth: 360 }}>
-              <ListItemButton
-                onClick={() => {
-                  setOpenMenu((prev) => ({ ...prev, Home: !prev.Home }));
-                }}
-              >
-                Home
-                {openMenu?.Home ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </ListItemButton>
-              <Collapse in={openMenu?.Home} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemText primary="Starred" />
+              {MenuCategoryList.map((cat) => (
+                <>
+                  <ListItemButton
+                    onClick={() => {
+                      console.log(cat.mainCategoryName);
+                      setOpenMenu((prev) => ({
+                        ...prev,
+                        [cat.mainCategoryName]: !prev?.[cat.mainCategoryName],
+                      }));
+                    }}
+                  >
+                   <ListItemText  primary= {cat.mainCategoryName}/>
+                    {openMenu?.Home ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                   </ListItemButton>
-                </List>
-              </Collapse>
+                  <Collapse
+                    in={openMenu?.[cat.mainCategoryName]}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <List component="div" disablePadding>
+                      {(cat?.subCategory).map((subcat) => (
+                        <ListItemButton sx={{ pl: 4 }}>
+                          <ListItemText primary={subcat?.subCategoryName} />
+                        </ListItemButton>
+                      ))}
+                    </List>
+                  </Collapse>
+                </>
+              ))}
 
-              <ListItemButton
-                onClick={() =>
-                  setOpenMenu((prev) => ({ ...prev, Fashion: !prev.Fashion }))
-                }
-              >
-                Fashion
-              </ListItemButton>
-              {openMenu?.Fashion ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              <Collapse in={openMenu?.Fashion} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemText primary="Starred" />
-                  </ListItemButton>
-                </List>
-              </Collapse>
-              <ListItemButton>Kitchen</ListItemButton>
-              <ListItemButton>Electronics</ListItemButton>
+             
             </List>
           </Drawer>
 
