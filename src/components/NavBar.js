@@ -17,6 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
+import Link from '@mui/material/Link';
 
 import { useState } from "react";
 
@@ -30,22 +31,22 @@ function NavBar() {
         {
           setCategoryId: "1.1",
           subCategoryName: "Kitchen",
-          subCategoryRoute: "",
+          subCategoryRoute: "/home/kitchen",
         },
         {
           subCatergoryId: "",
           subCategoryName: "Dining",
-          subCategoryRoute: "",
+          subCategoryRoute: "/home/dining",
         },
         {
           subCatergoryId: 3,
           subCategoryName: "Bath",
-          subCategoryRoute: "",
+          subCategoryRoute: "/home/bath",
         },
         {
           subCatergoryId: 4,
           subCategoryName: "Home Accessories",
-          subCategoryRoute: "",
+          subCategoryRoute: "/home/homeaccessories",
         },
       ],
     },
@@ -57,17 +58,17 @@ function NavBar() {
         {
           setCategoryId: 1,
           subCategoryName: "Mens Fashion",
-          subCategoryRoute: "",
+          subCategoryRoute: "/fashion/mensfashion",
         },
         {
           subCatergoryId: 2,
           subCategoryName: "Womens Fashion",
-          subCategoryRoute: "",
+          subCategoryRoute: "/fashion/womensfashion",
         },
         {
           subCatergoryId: 3,
           subCategoryName: "Kids",
-          subCategoryRoute: "",
+          subCategoryRoute: "/fashion/kidsfashion",
         },
       ],
     },
@@ -79,44 +80,44 @@ function NavBar() {
         {
           setCategoryId: 1,
           subCategoryName: "grocery1",
-          subCategoryRoute: "",
+          subCategoryRoute: "/grocery",
         },
         {
           subCatergoryId: 2,
           subCategoryName: "grocery2",
-          subCategoryRoute: "",
+          subCategoryRoute:  "/grocery",
         },
         {
           subCatergoryId: 3,
           subCategoryName: "grocery3",
-          subCategoryRoute: "",
+          subCategoryRoute: "/grocery",
         },
       ],
     },
     {
       mainCategoryid: 4,
       mainCategoryName: "Electronics",
-      Mainroute: "/electronics",
+      mainroute: "/electronics",
       subCategory: [
         {
           setCategoryId: 1,
           subCategoryName: "Mobiles",
-          subCategoryRoute: "",
+          subCategoryRoute:"/electronics/mobiles",
         },
         {
           subCatergoryId: 2,
           subCategoryName: "TV",
-          subCategoryRoute: "",
+          subCategoryRoute: "/electronics/tv",
         },
         {
           subCatergoryId: 3,
           subCategoryName: "Laptops",
-          subCategoryRoute: "",
+          subCategoryRoute: "/electronics/laptops",
         },
         {
           subCatergoryId: 4,
           subCategoryName: "Accesories",
-          subCategoryRoute: "",
+          subCategoryRoute: "/electronics/accessories",
         },
       ],
     },
@@ -128,17 +129,17 @@ function NavBar() {
         {
           setCategoryId: 1,
           subCategoryName: "Luggage",
-          subCategoryRoute: "",
+          subCategoryRoute: "/others/lugagge"
         },
         {
           subCatergoryId: 2,
           subCategoryName: "Sports&Fitness",
-          subCategoryRoute: "",
+          subCategoryRoute: "/others/sports&fitness",
         },
         {
           subCatergoryId: 3,
           subCategoryName: "Books",
-          subCategoryRoute: "",
+          subCategoryRoute:  "/others/books",
         },
       ],
     },
@@ -203,7 +204,8 @@ function NavBar() {
                       }));
                     }}
                   >
-                   <ListItemText  primary= {cat.mainCategoryName}/>
+                    <Link href={cat.mainroute}> <ListItemText  primary= {cat.mainCategoryName}/></Link>
+                  
                     {openMenu?.Home ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                   </ListItemButton>
                   <Collapse
@@ -214,7 +216,8 @@ function NavBar() {
                     <List component="div" disablePadding>
                       {(cat?.subCategory).map((subcat) => (
                         <ListItemButton sx={{ pl: 4 }}>
-                          <ListItemText primary={subcat?.subCategoryName} />
+                          <Link href={subcat.subCategoryRoute}>  <ListItemText primary={subcat?.subCategoryName} /></Link>
+                        
                         </ListItemButton>
                       ))}
                     </List>
