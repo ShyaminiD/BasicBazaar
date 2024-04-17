@@ -17,7 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
-import Link from '@mui/material/Link';
+import Link from "@mui/material/Link";
 
 import { useState } from "react";
 
@@ -85,7 +85,7 @@ function NavBar() {
         {
           subCatergoryId: 2,
           subCategoryName: "grocery2",
-          subCategoryRoute:  "/grocery",
+          subCategoryRoute: "/grocery",
         },
         {
           subCatergoryId: 3,
@@ -102,7 +102,7 @@ function NavBar() {
         {
           setCategoryId: 1,
           subCategoryName: "Mobiles",
-          subCategoryRoute:"/electronics/mobiles",
+          subCategoryRoute: "/electronics/mobiles",
         },
         {
           subCatergoryId: 2,
@@ -129,7 +129,7 @@ function NavBar() {
         {
           setCategoryId: 1,
           subCategoryName: "Luggage",
-          subCategoryRoute: "/others/lugagge"
+          subCategoryRoute: "/others/luggage",
         },
         {
           subCatergoryId: 2,
@@ -139,7 +139,7 @@ function NavBar() {
         {
           subCatergoryId: 3,
           subCategoryName: "Books",
-          subCategoryRoute:  "/others/books",
+          subCategoryRoute: "/others/books",
         },
       ],
     },
@@ -193,39 +193,51 @@ function NavBar() {
             PaperProps={{ sx: { width: 300 } }}
           >
             <List sx={{ width: "100%", maxWidth: 360 }}>
-              {MenuCategoryList.map((cat) => (
-                <>
-                  <ListItemButton
-                    onClick={() => {
-                      console.log(cat.mainCategoryName);
-                      setOpenMenu((prev) => ({
-                        ...prev,
-                        [cat.mainCategoryName]: !prev?.[cat.mainCategoryName],
-                      }));
-                    }}
-                  >
-                    <Link href={cat.mainroute}> <ListItemText  primary= {cat.mainCategoryName}/></Link>
-                  
-                    {openMenu?.Home ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                  </ListItemButton>
-                  <Collapse
-                    in={openMenu?.[cat.mainCategoryName]}
-                    timeout="auto"
-                    unmountOnExit
-                  >
-                    <List component="div" disablePadding>
-                      {(cat?.subCategory).map((subcat) => (
-                        <ListItemButton sx={{ pl: 4 }}>
-                          <Link href={subcat.subCategoryRoute}>  <ListItemText primary={subcat?.subCategoryName} /></Link>
-                        
-                        </ListItemButton>
-                      ))}
-                    </List>
-                  </Collapse>
-                </>
-              ))}
-
-             
+              {MenuCategoryList.map((cat) => {
+                return (
+                  <>
+                    <ListItemButton
+                      sx={{ display: "flex", justifyContent: "space-between" }}
+                      onClick={() => {
+                        console.log(cat.mainCategoryName);
+                        setOpenMenu((prev) => ({
+                          ...prev,
+                          [cat.mainCategoryName]: !prev?.[cat.mainCategoryName],
+                        }));
+                      }}
+                    >
+                      <Link
+                        sx={{ textDecoration: "none", color: "inherit" }}
+                        href={cat.mainroute}
+                      >
+                        {" "}
+                        <ListItemText primary={cat.mainCategoryName} />
+                      </Link>
+                      {/* <ListItemText primary={cat.mainCategoryName} /> */}
+                      {openMenu?.Home ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                    </ListItemButton>
+                    <Collapse
+                      in={openMenu?.[cat.mainCategoryName]}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <List component="div" disablePadding>
+                        {(cat?.subCategory).map((subcat) => (
+                          <Link
+                            sx={{ textDecoration: "none", color: "inherit" }}
+                            href={subcat.subCategoryRoute}
+                          >
+                            <ListItemButton sx={{ pl: 4 }}>
+                              {" "}
+                              <ListItemText primary={subcat?.subCategoryName} />
+                            </ListItemButton>
+                          </Link>
+                        ))}
+                      </List>
+                    </Collapse>
+                  </>
+                );
+              })}
             </List>
           </Drawer>
 

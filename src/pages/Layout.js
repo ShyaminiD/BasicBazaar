@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Login from "./Login";
 import Kitchen from "./Home/Kitchen";
 import Bath from "./Home/Bath";
@@ -16,35 +16,63 @@ import Luggage from "./Others/Luggage";
 import SportsFitness from "./Others/Sports&Fitness";
 import Books from "./Others/Books";
 
-
-
 function Layout() {
   return (
     <>
       <NavBar />
-
-      <Routes>
-        <Route path="/" element={<Login />} />
-        {/* <Route path="/home" element={<Layout />} /> */}
-        <Route path="/home/kitchen" element={<Kitchen />} />
-        <Route path="/home/dining" element={<Dining />} />
-        <Route path="/home/bath" element={<Bath />} />
-        <Route path="/fashion/womensfashion" element={<WomensFashion />} />
-        <Route path="/fashion/mensfashion" element={<MensFashion />} />
-        <Route path="/fashion/kidsfashion" element={<KidsFashion />} />
-        <Route path="/electronics/mobiles" element={<Mobiles />} />
-        <Route path="/electronics/laptops" element={<Laptops />} />
-        <Route path="/electronics/accessories" element={<Accesories />} />
-        <Route path="/electronics/tv" element={<Tv />} />
-        <Route path="/others/lugagge" element={<Luggage />} />
-        <Route path="/others/sports&fitness" element={<SportsFitness />} />
-        <Route path="/others/books" element={<Books />} />
-
-
-
-      </Routes>
+      <NestedRoutes />
     </>
   );
 }
+function HomeRoutes() {
+  return (
+    <Routes>
+      <Route path="kitchen" element={<Kitchen />} />
+      <Route path="dining" element={<Dining />} />
+      <Route path="bath" element={<Bath />} />
+    </Routes>
+  );
+}
 
-export default Layout;
+function FashionRoutes() {
+  return (
+    <Routes>
+      <Route path="womensfashion" element={<WomensFashion />} />
+      <Route path="mensfashion" element={<MensFashion />} />
+      <Route path="kidsfashion" element={<KidsFashion />} />
+    </Routes>
+  );
+}
+
+function ElectronicsRoutes() {
+  return (
+    <Routes>
+      <Route path="mobiles" element={<Mobiles />} />
+      <Route path="laptops" element={<Laptops />} />
+      <Route path="accessories" element={<Accesories />} />
+      <Route path="tv" element={<Tv />} />
+    </Routes>
+  );
+}
+
+function OthersRoutes() {
+  return (
+    <Routes>
+      <Route path="luggage" element={<Luggage />} />
+      <Route path="sports&fitness" element={<SportsFitness />} />
+      <Route path="books" element={<Books />} />
+    </Routes>
+  );
+}
+
+function NestedRoutes() {
+  return (
+    <Routes>
+      <Route path="home/*" element={<HomeRoutes />} />
+      <Route path="fashion/*" element={<FashionRoutes />} />
+      <Route path="electronics/*" element={<ElectronicsRoutes />} />
+      <Route path="others/*" element={<OthersRoutes />} />
+    </Routes>
+  );
+}
+export { Layout, NestedRoutes };
