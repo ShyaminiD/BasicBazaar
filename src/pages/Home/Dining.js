@@ -2,6 +2,8 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import { red } from "@mui/material/colors";
@@ -15,8 +17,16 @@ import ItemCard from "../../components/ItemCard";
 function Dining() {
   console.log(diningData);
   return (
-      <>
-         {diningData.map((data)=> <ItemCard itemPic={data.itemPic[0]} itemName={data.itemName} itemMRP ={data.itemMRP}  itemDiscount ={data.itemDiscount} itemSalesPrice ={data.itemSalesPrice}  />)} 
+    <>
+      {diningData.map((data) => (
+        <ItemCard
+          itemPic={data.itemPic[0]}
+          itemName={data.itemName}
+          itemMRP={data.itemMRP}
+          itemDiscount={data.itemDiscount}
+          itemSalesPrice={data.itemSalesPrice}
+        />
+      ))}
       {/* {diningData.map((data) => (
         <Card sx={{ maxWidth: 345, textAlign: "left" }}>
           <CardMedia
@@ -52,6 +62,5 @@ function Dining() {
     </>
   );
 }
-
 
 export default Dining;

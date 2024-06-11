@@ -1,4 +1,7 @@
-import * as React from "react";
+//React Imports 
+import { useState } from "react";
+
+//Mui Imports
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,8 +21,8 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import Link from "@mui/material/Link";
+//Component Imports 
 
-import { useState } from "react";
 
 function NavBar() {
   const MenuCategoryList = [
@@ -152,7 +155,7 @@ function NavBar() {
     Electronics: false,
   };
   const [openMenu, setOpenMenu] = useState(initialCategoryState);
-  // console.log(openMenu);
+  console.log("openMenu",openMenu);
 
   const [categoryButton, setCategoryButton] = useState(null);
   const handleCategoryButton = (event) => {

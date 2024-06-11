@@ -1,6 +1,10 @@
-import NavBar from "../components/NavBar";
-
+// React Import
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { useState } from "react";
+//Mui Imports
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+//Components Imports 
 import Login from "./Login";
 import Kitchen from "./Home/Kitchen";
 import Bath from "./Home/Bath";
@@ -15,11 +19,21 @@ import Accesories from "./Electronics/Accesories";
 import Luggage from "./Others/Luggage";
 import SportsFitness from "./Others/Sports&Fitness";
 import Books from "./Others/Books";
+import LandingHomePage from "./LandingHomePage";
+import FilterBox from "./FilterBox";
+import NavBar from "../components/NavBar";
+
+
 
 function Layout() {
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+const [isCatSelected, setisCatSelected] = useState(true);
   return (
     <>
-      <NavBar />
+      <NavBar/>
+      {isCatSelected && <FilterBox selectedCategory ={selectedCategory} />}
+      {/* <FilterBox/> */}
       <NestedRoutes />
     </>
   );
@@ -68,6 +82,7 @@ function OthersRoutes() {
 function NestedRoutes() {
   return (
     <Routes>
+      {/* <Route path="/home" element={<LandingHomePage />} /> */}
       <Route path="home/*" element={<HomeRoutes />} />
       <Route path="fashion/*" element={<FashionRoutes />} />
       <Route path="electronics/*" element={<ElectronicsRoutes />} />
