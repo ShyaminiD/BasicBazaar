@@ -1,14 +1,9 @@
 import React from "react";
 import NavBar from "../components/NavBar";
-import { Layout } from "./Layout";
+import { Layout } from "./SubLayout";
 
 function LandingHomePage() {
-  return (
-    <>
-      <NavBar />
-      Landing Page content
-    </>
-  );
+  return <>Landing Page content</>;
 }
 
 export default LandingHomePage;
