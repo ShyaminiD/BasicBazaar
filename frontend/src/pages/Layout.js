@@ -1,9 +1,10 @@
 import React from "react";
-import { Grid } from "@mui/material";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingHomePage from "./LandingHomePage";
 import NavBar from "../components/NavBar";
-import  SubLayout  from "./SubLayout";
+import SubLayout from "./SubLayout";
+import Grid from '@mui/material/Grid';
 
 export default function Layout() {
   return (

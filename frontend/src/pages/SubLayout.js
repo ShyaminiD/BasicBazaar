@@ -4,7 +4,7 @@ import { useState } from "react";
 //Mui Imports
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-//Components Imports 
+//Components Imports
 import Login from "./Login";
 import Kitchen from "./Home/Kitchen";
 import Bath from "./Home/Bath";
@@ -20,24 +20,28 @@ import Luggage from "./Others/Luggage";
 import SportsFitness from "./Others/Sports&Fitness";
 import Books from "./Others/Books";
 import LandingHomePage from "./LandingHomePage";
-import FilterBox from "./FilterBox";
+import FilterBox from "../components/FilterBox";
 import NavBar from "../components/NavBar";
-
-
+import Grid from "@mui/material/Grid";
 
 function SubLayout() {
-
   const [selectedCategory, setSelectedCategory] = useState(null);
-const [isCatSelected, setisCatSelected] = useState(true);
+  const [isCatSelected, setisCatSelected] = useState(true);
   return (
-    <>
-
-      {isCatSelected && <FilterBox selectedCategory ={selectedCategory} />}
-      {/* <FilterBox/> */}
-      <NestedRoutes />
-    </>
+    <Grid container>
+      <Grid item xs={false} sm={2}>
+        {isCatSelected && <FilterBox selectedCategory={selectedCategory} />}
+      </Grid>
+      <Grid item xs={12} sm={10} style={{ backgroundColor: "green" }}>
+        <Grid container>
+        <NestedRoutes />
+        </Grid>
+       
+      </Grid>
+    </Grid>
   );
 }
+
 function HomeRoutes() {
   return (
     <Routes>
@@ -82,7 +86,6 @@ function OthersRoutes() {
 function NestedRoutes() {
   return (
     <Routes>
-      {/* <Route path="/home" element={<LandingHomePage />} /> */}
       <Route path="home/*" element={<HomeRoutes />} />
       <Route path="fashion/*" element={<FashionRoutes />} />
       <Route path="electronics/*" element={<ElectronicsRoutes />} />

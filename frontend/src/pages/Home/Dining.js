@@ -13,19 +13,23 @@ import bowl1 from "../../images/home/dining/bowl1.jpg";
 import GradeIcon from "@mui/icons-material/Grade";
 import { diningData } from "../../Data";
 import ItemCard from "../../components/ItemCard";
+import  Grid  from "@mui/material/Grid";
 
 function Dining() {
   console.log(diningData);
   return (
     <>
+      
       {diningData.map((data) => (
+        <Grid xs ={12}  md ={6} lg ={4}>
         <ItemCard
-          itemPic={data.itemPic[0]}
+          itemPic={data.itemPic[0]}c
           itemName={data.itemName}
           itemMRP={data.itemMRP}
           itemDiscount={data.itemDiscount}
           itemSalesPrice={data.itemSalesPrice}
-        />
+          />
+          </Grid>
       ))}
       {/* {diningData.map((data) => (
         <Card sx={{ maxWidth: 345, textAlign: "left" }}>
