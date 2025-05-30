@@ -10,7 +10,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 function ItemCard({itemPic, itemName, itemMRP, itemDiscount, itemSalesPrice}) {
   return (
-    <Card sx={{ textAlign: "left" }}>
+    <Card sx={{ maxWidth:"200", textAlign: "left" }}>
       <CardMedia
         component="img"
         height="194"
